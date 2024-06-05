@@ -1,0 +1,98 @@
+{% extends "base.html" %} {% block title%}{{ pet.name }}{%
+endblock %} {% block content%}
+
+<div class="container mt-5">
+	<div class="text-center">
+		<h1 class="display-2 mb-4">Meet {{ pet.name }}</h1>
+
+		{% if pet.photo_url %}
+		<img
+			src="{{ pet.photo_url }}"
+			alt="Photo of {{ pet.name }}"
+			class="rounded-circle mb-4"
+			style="width: 300px; height: 300px"
+		/>
+		{% endif %}
+
+		<p class="lead">Species: {{ pet.species }}</p>
+
+		{% if pet.age %}
+		<p class="lead">Age: {{pet.age }}</p>
+		{% endif %}
+		<!--  -->
+		{% if pet.notes %}
+		<p class="lead">{{ pet.notes }}</p>
+		{% endif %}
+
+		<br />
+
+		<h2 class="display-3 mt-5">Update Information</h2>
+	</div>
+
+	<form
+		method="POST"
+		action="{{ url_for('pet_details', id=pet.id) }}"
+		class="mt-4"
+	>
+		{{ edit_form.hidden_tag() }}
+
+		<div class="mb-3">
+			<p>
+				{{ edit_form.name.label }} {{
+				edit_form.name(class="form-control") }}
+			</p>
+		</div>
+
+		<div class="mb-3">
+			<p>
+				{{ edit_form.species.label }} {{
+				edit_form.species(class="form-control") }}
+			</p>
+			<div>
+				{% for error in edit_form.species.errors %}
+				<span>{{ error }}</span> {% endfor %}
+			</div>
+		</div>
+
+		<div class="mb-3">
+			<p>
+				{{ edit_form.photo_url.label }} {{
+				edit_form.photo_url(class="form-control") }}
+			</p>
+			<div>
+				{% for error in edit_form.photo_url.errors %}
+				<span>{{ error }}</span> {% endfor %}
+			</div>
+		</div>
+
+		<div class="mb-3">
+			<p>
+				{{ edit_form.age.label }} {{
+				edit_form.age(class="form-control") }}
+			</p>
+			<div>
+				{% for error in edit_form.age.errors %}
+				<span>{{ error }}</span> {% endfor %}
+			</div>
+		</div>
+
+		<div class="mb-3">
+			<p>
+				{{ edit_form.notes.label }} {{
+				edit_form.notes(class="form-control") }}
+			</p>
+		</div>
+
+		<div class="mb-3 form-check">
+			<p>
+				{{ edit_form.available.label }} {{
+				edit_form.available(class="form-check-input") }}
+			</p>
+		</div>
+
+		<button class="btn btn-success">
+			{{ edit_form.submit.label }}
+		</button>
+	</form>
+</div>
+{% endblock %}

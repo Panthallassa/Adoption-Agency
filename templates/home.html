@@ -1,0 +1,58 @@
+{% extends "base.html" %} {% block title%}Home{% endblock %}
+{% block content%}
+
+<div
+	class="container d-flex justify-content-center align-items-center vh-90"
+>
+	<div>
+		<h1 class="mb-4 mt-4 display-1">
+			Available Pets for Adoption
+		</h1>
+
+		<ul
+			class="list-group mx-auto"
+			style="width: fit-content"
+		>
+			{% for pet in pets %}
+			<li
+				class="lsit-group-item d-flex align-items-center py-3"
+			>
+				<div>
+					<strong>
+						<a
+							href="{{ url_for('pet_details', id=pet.id) }}"
+							style="color: inherit"
+						>
+							{{ pet.name }}</a
+						></strong
+					>
+
+					{% if pet.available %}
+					<span class="badge bg-success ms-2"
+						>Available</span
+					>{% endif %}
+				</div>
+				<img
+					src="{{pet.photo_url}}"
+					alt="Photo of {{ pet.name }}"
+					class="rounded-circle"
+					style="
+						width: 150px;
+						height: 150px;
+						margin-left: 15px;
+					"
+				/>
+			</li>
+			{% endfor %}
+		</ul>
+
+		<div class="text-center">
+			<a
+				href="{{ url_for('add_pet') }}"
+				class="btn btn-success mt-3"
+				>Add New Pet</a
+			>
+		</div>
+	</div>
+</div>
+{% endblock %}

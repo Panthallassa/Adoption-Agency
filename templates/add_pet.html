@@ -1,0 +1,70 @@
+{% extends "base.html" %} {% block title%}Add Pet{% endblock
+%} {% block content%}
+
+<div class="container mt-5">
+	<h1 class="display-2 mb-4 text-center">Add Pet!</h1>
+
+	<form method="POST" action="">
+		{{ form.hidden_tag() }}
+
+		<div class="mb-3">
+			<p>
+				{{ form.name.label }} {{
+				form.name(class="form-control") }}
+			</p>
+		</div>
+		<div class="mb-3">
+			<p>
+				{{ form.species.label }} {{
+				form.species(class="form-control") }}
+			</p>
+			<div>
+				{% for error in form.species.errors %}
+				<span>{{ error }}</span> {% endfor %}
+			</div>
+		</div>
+
+		<div class="mb-3">
+			<p>
+				{{ form.photo_url.label }} {{
+				form.photo_url(class="form-control") }}
+			</p>
+			<div>
+				{% for error in form.photo_url.errors %}
+				<span>{{ error }}</span> {% endfor %}
+			</div>
+		</div>
+
+		<div class="mb-3">
+			<p>
+				{{ form.age.label }} {{
+				form.age(class="form-control") }}
+			</p>
+			<div>
+				{% for error in form.age.errors %}
+				<span>{{ error }}</span> {% endfor %}
+			</div>
+		</div>
+
+		<div class="mb-3">
+			<p>
+				{{ form.notes.label }} {{
+				form.notes(class="form-control") }}
+			</p>
+		</div>
+
+		<div class="mb-3 form-check">
+			<p>
+				{{ form.available.label }} {{
+				form.available(class="form-check-input") }}
+			</p>
+		</div>
+
+		<div class="mb-3">
+			<button type="submit" class="btn btn-success">
+				{{ form.submit.label }}
+			</button>
+		</div>
+	</form>
+</div>
+{% endblock %}
